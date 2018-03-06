@@ -1,17 +1,30 @@
 body {
-  font-family: 'Press Start 2P', cursive;
+  /* font-family: 'Press Start 2P', cursive; */
   background-image: url('../assets/images/background.jpg');
   background-repeat: repeat;
 }
 
+h2 {
+  margin: 1% 0;
+  font-size: 0.9em;
+}
+
+h3 {
+  font-size: 0.8em;
+}
+
 [alt^="sw-logo"] {
+  margin: 3% 0%;
   width: 40%;
 }
 
-#pokemons-container > section > div > img{
-  height: 10em;
-  margin: 6% 0;
-  width: 80%;
+#films-container {
+  padding: 5% 0%;
+}
+
+.card {
+  margin: 5% 2%;
+  max-height: 10em;
 }
 
 .footer {
@@ -31,93 +44,6 @@ body {
 
 .pokemon-card {
   margin: 1% 0%;
-}
-
-.card-body {
-  background-color: #DA1E2D;
-  color: whitesmoke;
-  padding: 1% 0;
-}
-
-h2 {
-  margin: 1% 0;
-  font-size: 1em
-}
-
-h3 {
-  font-size: 0.8em;
-}
-
-.Grass {
-  background-color: #69C23D;
-}
-
-.Poison {
-  background-color: #A040A0;
-}
-
-.Water {
-  background-color: #4578ED;
-}
-
-.Electric {
-  background-color: #F6C913;
-}
-
-.Fighting {
-  background-color: #AE2A24;
-}
-
-.Fairy {
-  background-color: #E87890;
-}
-
-.Fire {
-  background-color: #ED6D12;
-}
-
-.Ice {
-  background-color: #7ECECE;
-}
-
-.Flying {
-  background-color: #8E6FEB;
-}
-
-.Psychic {
-  background-color: #F73670;
-}
-
-.Bug {
-  background-color: #97A51D;
-}
-
-.Steel {
-  background-color: #A0A0C0;
-}
-
-.Ground {
-  background-color: #DBB54D;
-}
-
-.Rock {
-  background-color: #9C9C63;
-}
-
-.Normal {
-  background-color: #9C9C63;
-}
-
-.Ghost {
-  background-color: #644E88;
-}
-
-.Dragon {
-  background-color: #5E1DF7;
-}
-
-.Dark {
-  background-color: #644E40;
 }
 
 .btn-sm {
