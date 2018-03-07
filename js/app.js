@@ -1,36 +1,36 @@
 // función que busca la data y la 'cachea'
-if(!localStorage.getItem('sw-films')) {
-  $.ajax({
-    url: `https://swapi.co/api/`
-  }).done(getData)
+if(!localStorage.getItem('sw-data')) {
+  $.post({
+    url: 'https://swapi.apis.guru/',
+    data: JSON.stringify({ "query": " { allFilms { films { title episodeID characterConnection { characters { name height mass hairColor skinColor } } } } } " }),
+    contentType: 'application/json'
+  }).done(function(response) {
+    // console.log(response);
+    let swData = ('Fetched:', response.data.allFilms.films);
+    localStorage.setItem('sw-data', JSON.stringify(swData));
+  });
 } else {
-  getData(localStorage.getItem('sw-films'))
+  getSwData(localStorage.getItem('sw-data'))
 }
 
 // función que obtiene la data 'cacheada'
-function getData(data) {
-  $.ajax({
-    url: `${data.films}`
-  }).done(getFilmsData)
-}
-
-function getFilmsData(data){
-  console.log(data);
-  let films = data.results
+function getSwData(data) {
+  let filmsData = JSON.parse(data)
   .forEach(film => {
     paintFilmsCard(film)
   })
 }
 
-// función que pinta en html cada película
-function paintFilmsCard(films){
+// // función que pinta en html cada película
+function paintFilmsCard(film){
   let card = '';
   card +=
-  `<section class="col-lg-3 col-8 film-card" data-toggle="modal" data-target="#film-detail" data-id="${films.episode_id}">
+  `<section class="col-lg-6 col-6 film-card">
     <div class="card">
       <div class="card-body">
-        <h2 class="text-center">Name: ${films.title}</h2>
-        <h3 class="text-center">Episode ID: ${films.episode_id}</h3>
+        <h2 class="text-center">${film.title}</h2>
+        <h3 class="text-center">Episode ${film.episodeID}</h3>
+        <h3 class="text-center">Characters:</h3>
         <ul class="characters-container">
         </ul>
       </div>
@@ -38,6 +38,17 @@ function paintFilmsCard(films){
   </section>`
 
   $('#films-container').append(card)
+  getCharacters(film.characterConnection.characters)
+}
+
+// función que itera sobre el arreglo que contiene los personajes
+function getCharacters(array) {
+  console.log(array);
+  return array.forEach(item => {
+    let character = ``
+    character += `<li data-toggle="modal" data-target="#character-detail" data-id="${item.name}">${item.name}</li>`
+    $('.characters-container').append(character)
+  })
 }
 
 // // función que crea los modales con los datos particulares del pokemon

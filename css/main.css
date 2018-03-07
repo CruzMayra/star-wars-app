@@ -4,13 +4,17 @@ body {
   background-repeat: repeat;
 }
 
-h2 {
+/* h2 {
   margin: 1% 0;
   font-size: 0.9em;
 }
 
 h3 {
   font-size: 0.8em;
+} */
+
+li {
+  font-size: 0.7em;
 }
 
 [alt^="sw-logo"] {
@@ -24,7 +28,7 @@ h3 {
 
 .card {
   margin: 5% 2%;
-  max-height: 10em;
+  /* max-height: 10em; */
 }
 
 .footer {
