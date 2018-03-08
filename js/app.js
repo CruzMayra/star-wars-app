@@ -5,7 +5,6 @@ if(!localStorage.getItem('sw-data')) {
     data: JSON.stringify({ "query": " { allFilms { films { title episodeID characterConnection { characters { name } } } } allPeople { people { name height mass hairColor skinColor } } } " }),
     contentType: 'application/json'
   }).done(function(response) {
-    // console.log(response);
     let swData = ('Fetched:', response.data);
     localStorage.setItem('sw-data', JSON.stringify(swData));
   });
