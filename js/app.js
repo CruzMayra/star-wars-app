@@ -2,10 +2,11 @@
 if(!localStorage.getItem('sw-data')) {
   $.post({
     url: 'https://swapi.apis.guru/',
-    data: JSON.stringify({ "query": " { allFilms { films { title episodeID characterConnection { characters { name height mass hairColor skinColor } } } } } " }),
+    data: JSON.stringify({ "query": " { allFilms { films { title episodeID characterConnection { characters { name } } } } allPeople { people { name height mass hairColor skinColor } } } " }),
     contentType: 'application/json'
   }).done(function(response) {
-    let swData = ('Fetched:', response.data.allFilms.films);
+    // console.log(response);
+    let swData = ('Fetched:', response.data);
     localStorage.setItem('sw-data', JSON.stringify(swData));
   });
 } else {
@@ -14,9 +15,8 @@ if(!localStorage.getItem('sw-data')) {
 
 // función que obtiene la data 'cacheada'
 function getSwData(data) {
-  // console.log(data);
   let filmsData = JSON.parse(data)
-  .forEach(film => {
+  filmsData.allFilms.films.forEach(film => {
     paintFilmsCard(film)
   })
 }
@@ -44,16 +44,19 @@ function paintFilmsCard(film){
     </div>
   </section>`
 
-  $('#films-container').append(card)
+  $('#films-container').prepend(card)
 }
 
 // función que crea los modales con los datos particulares del personaje
 $('#character-detail').on('show.bs.modal', function (event) {
   let card = $(event.relatedTarget) // Button that triggered the modal
-  let character = JSON.parse(localStorage.getItem('sw-data')).find(item => {
-    return card.data('id')
+  let character = JSON.parse(localStorage.getItem('sw-data')).allPeople.people.find(item => {
+    return item.name === card.data('id')
   })
-  console.log(character);
   let modal = $(this);
   modal.find('.name').text(character.name);
+  modal.find('.character-height').text(character.height);
+  modal.find('.character-mass').text(character.mass);
+  modal.find('.character-hair-color').text(character.hairColor);
+  modal.find('.character-skin-color').text(character.skinColor);
 })
